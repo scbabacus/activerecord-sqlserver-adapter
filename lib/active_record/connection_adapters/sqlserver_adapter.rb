@@ -333,6 +333,8 @@ module ActiveRecord
           NoDatabaseError.new(message)
         when /data would be truncated/
           ValueTooLong.new(message)
+        when /connection timed out/
+          StatementTimeout.new(message)
         when /Column '(.*)' is not the same data type as referencing column '(.*)' in foreign key/
           pk_id, fk_id = SQLServer::Utils.extract_identifiers($1), SQLServer::Utils.extract_identifiers($2)
           MismatchedForeignKey.new(
